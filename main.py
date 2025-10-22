@@ -1,8 +1,6 @@
 from fastapi import FastAPI
 import asyncio
-import os
-from routes.rose_ai_router import rose_watcher  # your existing watcher function
-import uvicorn
+from routes.rose_ai_router import rose_watcher  # your watcher function
 
 app = FastAPI()
 
@@ -11,11 +9,6 @@ async def startup_event():
     # Start the MongoDB watcher automatically on server start
     asyncio.create_task(rose_watcher())
 
-# Optional: a simple route
 @app.get("/")
 async def home():
     return {"message": "R.O.S.E is running in the background!"}
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # Render will set $PORT
-    uvicorn.run("main:app", host="0.0.0.0", port=port)
