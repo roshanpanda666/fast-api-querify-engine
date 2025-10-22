@@ -1,6 +1,7 @@
 services:
+  # 🌐 FastAPI backend
   - type: web
-    name: querify-python-backend
+    name: querify-backend
     env: python
     plan: free
     branch: main
@@ -10,4 +11,22 @@ services:
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: GEMINI_API_KEY
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+
+  # ⚙️ R.O.S.E worker (background AI router)
+  - type: worker
+    name: querify-rose-worker
+    env: python
+    plan: free
+    branch: main
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: python routes/rose_ai_router.py
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: MONGODB_URI
         sync: false
