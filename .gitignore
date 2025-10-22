@@ -1,0 +1,28 @@
+# Virtual environment
+# This is likely the cause of your 6k+ files.
+engine2/
+.venv/
+env/
+.env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+
+# Distribution / packaging
+.Python
+*.egg-info/
+build/
+dist/
+
+# Logs
+*.log
+
+# Sensitive Data / Environment variables
+# DO NOT COMMIT SECRETS
+.env
+.flaskenv
+
+# Editor/OS Files (VS Code, Windows)
+.vscode/
+Thumbs.db
